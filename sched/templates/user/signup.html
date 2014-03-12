@@ -1,29 +1,31 @@
 {% extends 'base.html' %}
 
-{% block title %}Register{% endblock title %}
+{% block title %}SignUp{% endblock title %}
 
 {% block main %}
 <div class="row">
-  <div class="login well offset2 span8">
-    <form method="post" class="form-horizontal">
+  <div class="login well col-md-offset-2 col-md-8">
+    <form method="post" class="form-horizontal" role="form">
       <legend>Sign Up</legend>
-      {% if error %}<p class="alert alert-error">{{ error }}</p>{% endif %}
-      <div class="control-group{% if form.username.errors %} error{% endif%}">
-        {{ form.username.label(class="control-label") }}
-        <div class="controls">
-          {{ form.username }}
-          {% for error in form.username.errors %}<span class="help-inline">{{ error }}</span>{% endfor %}
+      {% if error %}<p class="alert alert-danger">{{ error }}</p>{% endif %}
+      <div class="form-group{% if form.username.errors %} error{% endif%} has-feedback">
+        {{ form.username.label(class="col-sm-2 control-label") }}
+        <div class="col-sm-5">
+            {{ form.username(class="form-control", placeholder="Email") }}
+            {% for error in form.username.errors %}<span class="help-inline">{{ error }}</span>{% endfor %}
         </div>
       </div>
-      <div class="control-group{% if form.password.errors %} error{% endif%}">
-        {{ form.password.label(class="control-label") }}
-        <div class="controls">
-          {{ form.password }}
+      <div class="form-group{% if form.password.errors %} error{% endif%} has-feedback">
+        {{ form.password.label(class="col-sm-2 control-label") }}
+        <div class="col-sm-5">
+          {{ form.password(class="form-control", placeholder="Password") }}
           {% for error in form.password.errors %}<span class="help-inline">{{ error }}</span>{% endfor %}
         </div>
       </div>
-      <div class="form-actions">
-        <button type="submit" class="btn">Sign Up</button>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-primary">Sign Up</button>
+        </div>
       </div>
     </form>
   </div>

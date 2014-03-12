@@ -127,7 +127,7 @@ def error_not_found(error):
 #user manipulation, including sign up, login and logout
 @app.route('/signup/', methods=['GET', 'POST'])
 def signup():
-	form = RegisterForm(request.form)
+	form = SignupForm(request.form)
 	error = None
 	if request.method == 'GET':
 		return render_template('user/signup.html', form=form)
