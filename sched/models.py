@@ -55,7 +55,6 @@ class User(Base):
 			return user, False
 		return user, user.check_password(password)
 
-
 	def get_id(self):
 		return str(self.id)
 

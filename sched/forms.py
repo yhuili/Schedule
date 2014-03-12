@@ -6,7 +6,7 @@ from werkzeug.datastructures import ImmutableMultiDict as multidict
 
 
 class AppointmentForm(Form):
-	"""HTML form generation and validation of form data, display a form in HTML"""
+	"""HTML form generation and validation of appointment data, display a form in HTML"""
 	title = TextField('Title', [Length(max=255)]) #the second parameter Length is used to ensure an input of maximum of 255 chars
 	start = DateTimeField('Start', [required()])
 	end = DateTimeField('End')
@@ -14,10 +14,17 @@ class AppointmentForm(Form):
 	location = TextField('Location', [Length(max=255)])
 	description = TextAreaField('Description')
 
+
 class LoginForm(Form):
-	"""HTML form generation and validation of form data, display a form in HTML"""
+	"""HTML form generation and validation of user login data, display a form in HTML"""
 	username = TextField('username', [required()])
 	password = PasswordField('password', [required()])	
+
+
+class SignupForm(Form):
+	"""HTML form generation and validation of user register data, display a form in HTML"""
+	username = TextField('username', [required()])
+	password = PasswordField('password', [required()])
 
 
 if __name__ == '__main__':

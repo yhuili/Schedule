@@ -4,7 +4,7 @@ from flask.ext.login import LoginManager, current_user
 from flask.ext.login import login_user, logout_user, login_required
 from flask.ext.sqlalchemy import SQLAlchemy
 from sched import config, filters
-from sched.forms import AppointmentForm, LoginForm
+from sched.forms import AppointmentForm, LoginForm, SignupForm
 from sched.models import Base, Appointment, User
 
 #create an instance of Flask, which is app
@@ -124,12 +124,27 @@ def error_not_found(error):
 
 
 
-#user manipulation, including register, login and logout
-@app.route('/register/', methods=['GET', 'POST'])
-def register():
+#user manipulation, including sign up, login and logout
+@app.route('/signup/', methods=['GET', 'POST'])
+def signup():
+	form = RegisterForm(request.form)
+	error = None
 	if request.method == 'GET':
-		return render_template('user/register.html', form=form)
-
+		return render_template('user/signup.html', form=form)
+	if request.method == 'POST' and form.validate():
+		email = form.username.data.lower().strip()
+		password = form.password.data.lower().strip()
+		user, authenticated = User.authenticate(db.session.query, email, password)
+		if user is None:
+			user = User(email=email, password=password)
+			db.session.add(user)
+			db.session.commit()
+			login_user(user)
+			return redirect(url_for('appointment_list'))
+		else:
+			error = 'This email is already taken :('
+	return render_template('user/signup.html', form=form, error=error)
+			
 
 
 @app.route('/login/', methods=['GET', 'POST'])

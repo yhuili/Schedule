@@ -4,7 +4,7 @@ from jinja2 import Markup, evalcontextfilter, escape
 def init_app(app):
 	app.jinja_env.filters['date'] = do_date
 	app.jinja_env.filters['datetime'] = do_datetime
-	app.jinja_env.filters['do_duration'] = do_duration
+	app.jinja_env.filters['duration'] = do_duration
 	app.jinja_env.filters['nl2br'] = evalcontextfilter(do_nl2br)
 
 
