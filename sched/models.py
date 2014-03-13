@@ -17,7 +17,7 @@ class User(Base):
 	created = Column(DateTime, default=datetime.now)
 	modified = Column(DateTime, default=datetime.now, onupdate=datetime.now)
 	name = Column('name', String(200))
-	email = Column(String, unique=True, nullable=False)
+	email = Column('email', String(200), unique=True, nullable=False)
 	active = Column(Boolean, default=True)
 	_password = Column('password', String(100))
 
@@ -104,8 +104,8 @@ if __name__ == '__main__':
 	from datetime import timedelta
 	from sqlalchemy import create_engine
 	from sqlalchemy.orm import sessionmaker
-	#using the SQLite database in memory, which only exists for the duration of Python's process execution.
-	engine = create_engine('sqlite://', echo=True)
+	#using the MySQL database based on sqlalchemy, which only exists for the duration of Python's process execution.
+	engine = create_engine('mysql+mysqlconnector://root:password@localhost/test', echo=True)
 	Base.metadata.create_all(engine)
 	Session = sessionmaker(bind=engine)
 	session = Session()
@@ -115,55 +115,55 @@ if __name__ == '__main__':
 	session.add(user)
 	session.commit()
 
-	now = datetime.now()
-	session.add(Appointment(
-		title = 'Important Interview', 
-		start = now+timedelta(days=3), 
-		end = now+timedelta(days=3, seconds=3600),
-		allday = False,
-		location = 'Universal Studio',
-		user_id = user.id))
-	session.commit()
+	# now = datetime.now()
+	# session.add(Appointment(
+	# 	title = 'Important Interview', 
+	# 	start = now+timedelta(days=3), 
+	# 	end = now+timedelta(days=3, seconds=3600),
+	# 	allday = False,
+	# 	location = 'Universal Studio',
+	# 	user_id = user.id))
+	# session.commit()
 
-	session.add(Appointment(
-		title = 'Past Interview', 
-		start = now-timedelta(days=7), 
-		end = now-timedelta(days=7, seconds=3600),
-		allday = False,
-		location = 'Universal Studio',
-		user_id = user.id))
-	session.commit()
+	# session.add(Appointment(
+	# 	title = 'Past Interview', 
+	# 	start = now-timedelta(days=7), 
+	# 	end = now-timedelta(days=7, seconds=3600),
+	# 	allday = False,
+	# 	location = 'Universal Studio',
+	# 	user_id = user.id))
+	# session.commit()
 
-	session.add(Appointment(
-		title = 'Follow Up', 
-		start = now-timedelta(days=4), 
-		end = now-timedelta(days=4, seconds=3600),
-		allday = False,
-		location = 'Universal Studio',
-		user_id = user.id))
-	session.commit()
+	# session.add(Appointment(
+	# 	title = 'Follow Up', 
+	# 	start = now-timedelta(days=4), 
+	# 	end = now-timedelta(days=4, seconds=3600),
+	# 	allday = False,
+	# 	location = 'Universal Studio',
+	# 	user_id = user.id))
+	# session.commit()
 
-	session.add(Appointment(
-		title = 'Day Off', 
-		start = now+timedelta(days=5), 
-		end = now+timedelta(days=5),
-		allday = True,
-		user_id = user.id))
-	session.commit()
+	# session.add(Appointment(
+	# 	title = 'Day Off', 
+	# 	start = now+timedelta(days=5), 
+	# 	end = now+timedelta(days=5),
+	# 	allday = True,
+	# 	user_id = user.id))
+	# session.commit()
 	
-	#create instance
-	appt = Appointment(
-		title = 'My Appointment', 
-		start = now,
-		end = now+timedelta(seconds=1800),
-		allday = False,
-		user_id = user.id)
-	session.add(appt)
-	session.commit()
+	# #create instance
+	# appt = Appointment(
+	# 	title = 'My Appointment', 
+	# 	start = now,
+	# 	end = now+timedelta(seconds=1800),
+	# 	allday = False,
+	# 	user_id = user.id)
+	# session.add(appt)
+	# session.commit()
 	
-	#update instace
-	appt.title = 'My Appointment 2'
-	session.commit()
+	# #update instace
+	# appt.title = 'My Appointment 2'
+	# session.commit()
 	
 	# #delete
 	# session.delete(appt)

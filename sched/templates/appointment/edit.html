@@ -15,14 +15,16 @@
   <div class="appointment-edit well col-md-offset-2 col-md-8">
     <form method="post" class="form-horizontal" role="form">
       <legend>{{ title }}</legend>
-      {{ edit_field(form.title, maxlength=255, class="col-md-3", placeholder="My Interview") }}
-      {{ edit_field(form.start, class="col-md-3", type="datetime", placeholder="yyyy-mm-dd hh:mm:ss") }}
-      {{ edit_field(form.end, class="col-md-3", type="datetime", placeholder="yyyy-mm-dd hh:mm:ss") }}
+      {{ edit_field(form.title, maxlength=255, class="col-sm-5 form-control", placeholder="My Interview with NBC") }}
+      {{ edit_field(form.start, class="col-sm-5 form-control", type="datetime", placeholder="yyyy-mm-dd hh:mm:ss") }}
+      {{ edit_field(form.end, class="col-sm-5 form-control", type="datetime", placeholder="yyyy-mm-dd hh:mm:ss") }}
       {{ edit_field(form.allday) }}
-      {{ edit_field(form.location, maxlength=255, class="col-md-3", placeholder="720 W 27th St, LA") }}
-      {{ edit_field(form.description, rows="5", class="col-md-5", placeholder="I need to take the laptop with me.") }}
-      <div class="form-actions">
-        <button type="submit" class="btn btn-primary">Save</button> or <a href="{{ url_for('appointment_list') }}">Cancel</a>
+      {{ edit_field(form.location, maxlength=255, class="col-sm-5 form-control", placeholder="720 W 27th St, Los Angeles") }}
+      {{ edit_field(form.description, rows="5", class="col-sm-7 form-control", placeholder="I need to take the laptop with me.") }}
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-primary">Save</button><span class="inline-pad"></span>or<span class="inline-pad"></span><a href="{{ url_for('appointment_list') }}">Cancel</a>
+        </div>
       </div>
     </form>
   </div>

@@ -35,9 +35,10 @@ whenever you want to work on the project, you only have to activate the correspo
     
     $ . env/bin/activate
 
-Next, set up your application with commands:
+Next, set up your application with commands, also install mysql-connector-python for MySQL connection:
 
     $ pip install -r requirement.txt
+    $ pip install -r require.txt
     $ python manage.py create_tables
 
 Start the development server with:
