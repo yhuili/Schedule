@@ -2,7 +2,7 @@ Event Schedule
 ========
     
     
-*This is an event schedule application based on Instant Flask Web Development*
+*This is an event schedule LBS*
 
 
 Basic requirement:
